@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;700;800&family=Inconsolata:wght@600&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
+   *{
+    	font-family: 'Inconsolata', monospace;
+	margin: 0;
+	padding: 0;
+    }
+    body{
+    	width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 72px;
+    }
+    @media only screen and (max-width: 800px) {
+  body {
+    font-size: 36px
+  }
+    @media only screen and (max-width: 400px) {
+  body {
+    font-size: 32px
+  }
+    @media only screen and (max-width: 350px) {
+  body {
+    font-size: 28px
+  }
+}
+</style>
+<body>
+
+<div id="timer"></div>
+
+<script>
+  function startCountdown(targetDate) {
+    function updateCountdown() {
+      const currentDate = new Date();
+      const timeDifference = targetDate - currentDate;
+
+      if (timeDifference > 0) {
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        document.getElementById('timer').textContent = `${days}D : ${hours}H : ${minutes}M : ${seconds}S`;
+        
+        setTimeout(updateCountdown, 1000); // Update every 1000 milliseconds (1 second)
+      } else {
+        document.getElementById('timer').textContent = "Time's up!";
+      }
+    }
+
+    updateCountdown(); // Start the countdown initially
+  }
+
+  // Set the target date to November 11, 2024, 23:59:59
+  const targetDate = new Date(2024, 10, 11, 23, 59, 59);
+
+  // Start the countdown
+  startCountdown(targetDate);
+</script>
+
+</body>
+</html>
